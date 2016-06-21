@@ -313,6 +313,62 @@ namespace v1Changes {
                 validate: false
             });
         }
+
+        function test_add() {
+            var collection = new EmployeeCollection();
+            var model = new Employee();
+            var models: Array<Employee> = [
+                new Employee(),
+                new Employee()
+            ];
+
+            collection.add(model, { merge: false });
+            collection.add({ name: 'JoeDoe_1', age: 21 }, { merge: false });
+
+            collection.add(models, { merge: false });
+            collection.add(
+                [
+                    { name: 'JoeDoe_1', age: 21 },
+                    { name: 'JoeDoe_2', age: 22 }
+                ],
+                { merge: false }
+            );
+            collection.add(
+                [
+                    model,
+                    { name: 'JoeDoe_2', age: 22 }
+                ],
+                { merge: false }
+            );
+        }
+
+        function test_remove() {
+            var collection = new EmployeeCollection();
+            var model = new Employee();
+            var models: Array<Employee> = [
+                new Employee({ id: 1 }),
+                new Employee({ id: 2 })
+            ];
+
+            collection.remove(model, { silent: false });
+            collection.remove({ id: 1, name: 'JoeDoe_1', age: 21 }, { silent: false });
+
+            collection.remove(models, { silent: false });
+            collection.remove(
+                [
+                    { id: 1, name: 'JoeDoe_1', age: 21 },
+                    { id: 2, name: 'JoeDoe_2', age: 22 }
+                ],
+                { silent: false }
+            );
+            collection.remove(
+                [
+                    model,
+                    { id: 2, name: 'JoeDoe_2', age: 22 }
+                ],
+                { silent: false }
+            );
+        }
     }
 
     namespace Router {
